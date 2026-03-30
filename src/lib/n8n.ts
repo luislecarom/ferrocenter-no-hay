@@ -3,5 +3,11 @@ export async function callWebhook(url: string, options?: RequestInit) {
   if (!res.ok) {
     throw new Error(`n8n webhook error: ${res.status} ${res.statusText}`);
   }
-  return res.json();
+  const text = await res.text();
+  if (!text || text.trim() === "") return null;
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
 }

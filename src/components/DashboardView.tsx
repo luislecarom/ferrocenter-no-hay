@@ -42,11 +42,13 @@ export default function DashboardView() {
     );
   }
 
+  const maxCantidad = data.topGlobal[0]?.cantidad || 1;
+
   return (
     <div className="space-y-8">
       {/* Resumen IA */}
-      <div className="bg-red-50 border border-red-200 rounded-2xl p-5">
-        <h2 className="font-bold text-red-800 mb-2">📊 Resumen ejecutivo</h2>
+      <div className="rounded-2xl border p-5">
+        <h2 className="font-bold mb-2" style={{ color: "#2EBC22" }}>📊 Resumen ejecutivo</h2>
         <p className="text-gray-700 text-sm">{data.resumen}</p>
       </div>
 
@@ -56,19 +58,21 @@ export default function DashboardView() {
         {data.topGlobal.length === 0 ? (
           <p className="text-gray-400 text-sm">Sin datos aún.</p>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {data.topGlobal.map((item, i) => (
               <div key={i} className="flex items-center gap-3">
                 <span className="text-sm font-bold text-gray-400 w-6">{i + 1}</span>
                 <div className="flex-1">
-                  <div className="flex justify-between mb-1">
+                  <div className="flex justify-between mb-1 gap-2">
                     <span className="text-sm font-medium text-gray-800">{item.producto}</span>
-                    <span className="text-sm text-gray-500">{item.conteo} reportes</span>
+                    <span className="text-sm text-gray-500 whitespace-nowrap">
+                      {item.cantidad} necesarios · {item.reportes} {item.reportes === 1 ? "reporte" : "reportes"}
+                    </span>
                   </div>
                   <div className="bg-gray-100 rounded-full h-2">
                     <div
-                      className="bg-red-500 h-2 rounded-full"
-                      style={{ width: `${Math.min(100, (item.conteo / (data.topGlobal[0]?.conteo || 1)) * 100)}%` }}
+                      className="h-2 rounded-full"
+                      style={{ backgroundColor: "#FFE003", width: `${Math.min(100, (item.cantidad / maxCantidad) * 100)}%` }}
                     />
                   </div>
                 </div>
@@ -89,7 +93,9 @@ export default function DashboardView() {
               <div key={i} className="border border-gray-200 rounded-xl p-4">
                 <p className="text-xs text-gray-500 mb-1">{item.local}</p>
                 <p className="font-semibold text-gray-800">{item.producto}</p>
-                <p className="text-xs text-gray-400 mt-1">{item.conteo} reportes</p>
+                <p className="text-xs text-gray-400 mt-1">
+                  {item.cantidad} necesarios · {item.reportes} {item.reportes === 1 ? "reporte" : "reportes"}
+                </p>
               </div>
             ))}
           </div>

@@ -46,13 +46,14 @@ export default function ReportForm() {
     return (
       <div className="text-center py-10">
         <div className="text-5xl mb-4">✅</div>
-        <h2 className="text-2xl font-bold text-green-700 mb-2">¡Reporte enviado!</h2>
+        <h2 className="text-2xl font-bold mb-2" style={{ color: "#2EBC22" }}>¡Reporte enviado!</h2>
         <p className="text-gray-600 mb-6">
           <strong>{producto}</strong> fue registrado para <strong>{local}</strong>.
         </p>
         <button
           onClick={handleNuevo}
-          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-xl transition"
+          className="font-semibold px-6 py-3 rounded-xl transition text-gray-900"
+          style={{ backgroundColor: "#FFE003" }}
         >
           Reportar otro producto
         </button>
@@ -72,7 +73,8 @@ export default function ReportForm() {
           onChange={(e) => setProducto(e.target.value)}
           placeholder="Ej: Cemento gris 50kg, tubo PVC 1/2..."
           required
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2"
+          style={{ outlineColor: "#FFE003" }}
         />
       </div>
 
@@ -85,7 +87,8 @@ export default function ReportForm() {
           min={1}
           value={cantidad}
           onChange={(e) => setCantidad(Number(e.target.value))}
-          className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2"
+          style={{ outlineColor: "#FFE003" }}
         />
       </div>
 
@@ -100,7 +103,8 @@ export default function ReportForm() {
             value={local}
             onChange={(e) => setLocal(e.target.value)}
             required
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2"
+            style={{ outlineColor: "#FFE003" }}
           >
             {locales.map((l) => (
               <option key={l} value={l}>
@@ -118,7 +122,8 @@ export default function ReportForm() {
       <button
         type="submit"
         disabled={estado === "enviando"}
-        className="w-full bg-red-600 hover:bg-red-700 disabled:bg-red-300 text-white font-bold py-3 rounded-xl transition text-lg"
+        className="w-full font-bold py-3 rounded-xl transition text-lg text-gray-900 disabled:opacity-50"
+        style={{ backgroundColor: estado === "enviando" ? "#FFE003aa" : "#FFE003" }}
       >
         {estado === "enviando" ? "Enviando..." : "Reportar producto"}
       </button>

@@ -42,7 +42,8 @@ export default function LoginForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-red-600 hover:bg-red-700 disabled:bg-red-300 text-white font-bold py-3 rounded-xl transition"
+        className="w-full font-bold py-3 rounded-xl transition text-gray-900 disabled:opacity-50"
+          style={{ backgroundColor: "#FFE003" }}
       >
         {loading ? "Verificando..." : "Ingresar"}
       </button>
